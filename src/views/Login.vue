@@ -19,44 +19,6 @@
 import { defineComponent } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Axios from 'axios';
-let arr: any = [];
-for (let i = 2; i < 14; i++) {
-  for (let j = 2; j < 14; j++) {
-    if (i == j) continue;
-    if (i + j >= 14) continue;
-    arr.push({
-      i,
-      j,
-      sum: i + j,
-      pro: i * j,
-    });
-  }
-}
-for (let i = arr.length - 1; i > 0; i--) {
-  for (let j = 0; j < arr.length; j++) {
-    if (arr[i].i == arr[j].j && arr[i].j == arr[j].i) {
-      arr.splice(i, 1);
-      break;
-    }
-  }
-}
-for (let i = arr.length - 1; i > 0; i--) {
-  let sumone = true;
-  let proone = true;
-  for (let j = 0; j < arr.length; j++) {
-    if (i == j) continue;
-    if (arr[i].sum == arr[j].sum) {
-      sumone = false;
-    }
-    if (arr[i].pro == arr[j].pro) {
-      proone = false;
-    }
-  }
-  if (sumone || proone) {
-    arr.splice(i, 1);
-  }
-}
-console.log(arr);
 export default defineComponent({
   name: 'Login',
   data() {
