@@ -5,7 +5,7 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login,
   },
@@ -26,6 +26,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'Home',
     component: Home,
+  },
+  {
+    // 其他路径重定向到login界面
+    path: '/:catchAll(.*)',
+    redirect: '/login',
   },
 ];
 
