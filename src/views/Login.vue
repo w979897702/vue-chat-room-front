@@ -10,7 +10,7 @@
     <div class="button-wrapper">
       <button type="submit">登录</button>
       <router-link to="/register">
-        <button>注册</button>
+        <button>去注册</button>
       </router-link>
     </div>
   </form>
@@ -33,6 +33,8 @@ export default defineComponent({
       let res = await Axios.post('user/login', obj);
       if (!res.data.err) {
         alert('登录成功');
+        sessionStorage.setItem("currentUser",this.name)
+        this.$router.push("/home")
       } else {
         alert(res.data.err);
       }

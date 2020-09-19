@@ -9,6 +9,9 @@
     </div>
     <div class="button-wrapper">
       <button type="submit">注册</button>
+      <router-link to="/login">
+        <button>去登录</button>
+      </router-link>
     </div>
   </form>
 </template>

@@ -38,5 +38,9 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  if(to.name!= "Login"&& to.name!="Register" && !sessionStorage.getItem('currentUser')) next("/login");
+  next();
+});
 export default router;
