@@ -16,28 +16,48 @@
   </form>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Axios from 'axios';
 export default defineComponent({
-  name: 'Register',
-  data() {
-    return {
-      name: '',
-      password: '',
-    };
-  },
-  methods: {
-    async handleRegister(e: any) {
-      let obj = { name: this.name, password: this.password };
+  // vue2
+  // data() {
+  //   return {
+  //     name: '',
+  //     password: '',
+  //   };
+  // },
+  // methods: {
+  //   async handleRegister() {
+  //     let obj = { name: this.name, password: this.password };
+  //     let res = await Axios.post('user/register', obj);
+  //     if (!res.data.err) {
+  //       alert('注册成功');
+  //     } else {
+  //       alert(res.data.err);
+  //     }
+  //   },
+  // },
+  // composition
+  setup() {
+    let name = ref('');
+    let password = ref('');
+    async function handleRegister() {
+      let obj = { name: name.value, password: password.value };
       let res = await Axios.post('user/register', obj);
       if (!res.data.err) {
         alert('注册成功');
       } else {
         alert(res.data.err);
       }
-    },
+    }
+    return {
+      name,
+      password,
+      handleRegister,
+    };
   },
+  name: 'Register',
 });
 </script>
 <style lang="scss">

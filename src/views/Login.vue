@@ -16,29 +16,32 @@
   </form>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Axios from 'axios';
 export default defineComponent({
   name: 'Login',
-  data() {
-    return {
-      name: '',
-      password: '',
-    };
-  },
-  methods: {
-    async handleLogin() {
-      let obj = { name: this.name, password: this.password };
+  setup() {
+    let name = ref('');
+    let password = ref('');
+    const $router = useRouter();
+    async function handleLogin() {
+      let obj = { name: name.value, password: password.value };
       let res = await Axios.post('user/login', obj);
       if (!res.data.err) {
         alert('登录成功');
-        sessionStorage.setItem("currentUser",this.name)
-        this.$router.push("/home")
+        sessionStorage.setItem('currentUser', name.value);
+        $router.push('/home');
       } else {
         alert(res.data.err);
       }
-    },
+    }
+    return {
+      name,
+      password,
+      handleLogin,
+    };
   },
 });
 </script>
