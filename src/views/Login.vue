@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { setCookie } from '../utils/cookies';
 import Axios from 'axios';
 export default defineComponent({
   name: 'Login',
@@ -31,7 +31,7 @@ export default defineComponent({
       let res = await Axios.post('user/login', obj);
       if (!res.data.err) {
         alert('登录成功');
-        sessionStorage.setItem('currentUser', name.value);
+        setCookie('currentUser', name.value);
         $router.push('/home');
       } else {
         alert(res.data.err);

@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { getCookie } from '../utils/cookies';
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
+import ChatRoom from '../views/ChatRoom.vue';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
@@ -28,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
+    path: '/chat',
+    name: 'Chat',
+    component: ChatRoom,
+  },
+  {
     // 其他路径重定向到login界面
     path: '/:catchAll(.*)',
     redirect: '/login',
@@ -40,7 +47,7 @@ const router = createRouter({
 });
 // 路由守卫
 router.beforeEach((to, from, next) => {
-  if(to.name!= "Login"&& to.name!="Register" && !sessionStorage.getItem('currentUser')) next("/login");
+  if (to.name != 'Login' && to.name != 'Register' && !getCookie('currentUser')) next('/login');
   next();
 });
 export default router;
