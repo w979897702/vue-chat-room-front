@@ -4,7 +4,7 @@ const expired = 1051; // 超时
 const resFns = [];
 const reqFns = [];
 // 请求地址
-const ORIGIN = process.env.NODE_ENV === 'development' ? '/api' : '';
+const ORIGIN = process.env.NODE_ENV === 'development' ? '/api' : 'https://www.weixuzhao.top:9099/';
 
 // 请求拦截器
 export default function AxiosCreate(instance: any) {

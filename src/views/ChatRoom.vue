@@ -27,6 +27,7 @@
 import { defineComponent, ref, onMounted, reactive, nextTick } from 'vue';
 import { getCookie } from '../utils/cookies';
 import { parseDate } from '../utils/Date';
+import { url } from '../config/socket';
 export default defineComponent({
   name: 'ChatRoom',
   setup() {
@@ -49,7 +50,7 @@ export default defineComponent({
       chatBox.value.scrollTop = chatBox.value.scrollHeight;
     };
     onMounted(() => {
-      ws = new WebSocket('ws://172.16.1.44:9099');
+      ws = new WebSocket(url);
       // 响应onmessage事件:
       ws.onmessage = function(msg: MessageEvent) {
         let data: SocketData = JSON.parse(msg.data);
